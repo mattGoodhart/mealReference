@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  mealReference
 //
-//  Created by Alicia Goodhart on 1/4/22.
+//  Created by Matt Goodhart on 1/4/22.
 //
 
 import UIKit
