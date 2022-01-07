@@ -8,19 +8,20 @@
 import Foundation
 
 struct CategoriesResponse: Codable {
-    let result: [CategoryResults]
+    let categories: [MealCategory]
 }
 
-struct CategoryResults: Codable {
-    let categoryID: Int
+struct MealCategory: Codable {
+    let categoryID: String
     let category: String
     let categoryImageString: String
     let categoryDescription: String
-}
-
-enum CodingKeys: String, CodingKey {
-    case categoryID = "idCategory"
-    case category = "strCategory"
-    case categoryImageString = "strCategoryThumb"
-    case categoryDescription = "strCategoryDescription"
+    
+    enum CodingKeys: String, CodingKey {
+        case categoryID = "idCategory"
+        case category = "strCategory"
+        case categoryImageString = "strCategoryThumb"
+        case categoryDescription = "strCategoryDescription"
+    }
+    
 }
