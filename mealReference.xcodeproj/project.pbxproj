@@ -25,6 +25,7 @@
 		74D3429327864C1300255E3B /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D3429227864C1300255E3B /* WelcomeViewController.swift */; };
 		74D342952787785500255E3B /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D342942787785500255E3B /* CollectionCell.swift */; };
 		74D34297278896C000255E3B /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D34296278896C000255E3B /* ViewControllerExtension.swift */; };
+		74D342992789222900255E3B /* MealCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D342982789222900255E3B /* MealCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		74D3429227864C1300255E3B /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		74D342942787785500255E3B /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		74D34296278896C000255E3B /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
+		74D342982789222900255E3B /* MealCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				74D342532784EC4300255E3B /* AppDelegate.swift */,
 				74D342552784EC4300255E3B /* SceneDelegate.swift */,
+				74D3429A2789365900255E3B /* View */,
 				74D342912786433400255E3B /* View Controllers */,
 				74D3428B2786102400255E3B /* Networking */,
 				74D3428C2786117700255E3B /* Storyboards */,
@@ -169,13 +172,21 @@
 			isa = PBXGroup;
 			children = (
 				74D342572784EC4300255E3B /* CategoriesCollectionViewController.swift */,
-				74D342942787785500255E3B /* CollectionCell.swift */,
 				74D3428D278612FA00255E3B /* MealsByCategoryViewController.swift */,
 				74D3428F2786132500255E3B /* MealDetailsViewController.swift */,
 				74D3429227864C1300255E3B /* WelcomeViewController.swift */,
 				74D34296278896C000255E3B /* ViewControllerExtension.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		74D3429A2789365900255E3B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74D342942787785500255E3B /* CollectionCell.swift */,
+				74D342982789222900255E3B /* MealCollectionCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +326,7 @@
 				74D342582784EC4300255E3B /* CategoriesCollectionViewController.swift in Sources */,
 				74D342542784EC4300255E3B /* AppDelegate.swift in Sources */,
 				74D342902786132500255E3B /* MealDetailsViewController.swift in Sources */,
+				74D342992789222900255E3B /* MealCollectionCell.swift in Sources */,
 				74D342862784F1B900255E3B /* CategoriesResponse.swift in Sources */,
 				74D342562784EC4300255E3B /* SceneDelegate.swift in Sources */,
 				74D34297278896C000255E3B /* ViewControllerExtension.swift in Sources */,
