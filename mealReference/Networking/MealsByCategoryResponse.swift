@@ -8,13 +8,13 @@
 import Foundation
 
 struct MealsByCategoryResponse: Codable {
-    let result: [MealResults]
+    let meals: [MealResults]
 }
 
 struct MealResults: Codable {
     let mealName: String
     let mealImageString: String
-    let mealID: Int
+    let mealID: String
     
     enum CodingKeys: String, CodingKey {
         case mealName = "strMeal"

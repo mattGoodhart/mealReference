@@ -15,9 +15,9 @@ class CollectionCell: UICollectionViewCell {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
     override func prepareForReuse() {
         super.prepareForReuse()
+        activityIndicator.hidesWhenStopped = true
         textView.text = ""
         imageView.image = UIImage(systemName: "menucard.fill")
     }
