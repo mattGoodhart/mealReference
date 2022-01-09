@@ -8,18 +8,18 @@
 import Foundation
 
 struct MealDetailsResponse: Codable {
-    let result : [MealDetailResults]
+    let meals : [MealDetailResults]
 }
 
 struct MealDetailResults: Codable {
-    let mealID : Int
+    let mealID : String
     let mealName : String
     let drinkAlternate : String? // is this ever used?
     let category : String
     let area : String
     let instructions : String
     let mealImageURL : String
-    let tags : String
+    let tags : String?
     let youtubeURLString : String
     let ingredient1 : String
     let ingredient2 : String?

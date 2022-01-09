@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -34,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Welcome to mealReference!" textAlignment="center" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="757-Wz-Xiz" userLabel="Welcome">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Welcome to mealReference!" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="757-Wz-Xiz" userLabel="Welcome">
                                 <rect key="frame" x="20" y="95" width="374" height="158"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -238,18 +239,68 @@
         <!--Meal Details ViewController-->
         <scene sceneID="LwC-bO-cH7">
             <objects>
-                <viewController id="3ww-2J-hk3" userLabel="Meal Details ViewController" sceneMemberID="viewController">
+                <viewController id="3ww-2J-hk3" userLabel="Meal Details ViewController" customClass="MealDetailsViewController" customModule="mealReference" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zab-d3-mP4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQm-HN-TVi">
+                                <rect key="frame" x="0.0" y="88" width="414" height="1078"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UIe-UF-jRA">
+                                        <rect key="frame" x="20" y="0.0" width="414" height="313.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="nqN-nD-65R">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="285"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Az-dv-HBM" userLabel="All Text Label">
+                                                <rect key="frame" x="0.0" y="293" width="414" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="UIe-UF-jRA" secondAttribute="trailing" constant="20" symbolic="YES" id="CCo-SR-27v"/>
+                                    <constraint firstItem="nqN-nD-65R" firstAttribute="width" secondItem="WJW-tj-i8X" secondAttribute="width" id="Sdb-RO-Br7"/>
+                                    <constraint firstItem="3Az-dv-HBM" firstAttribute="width" secondItem="WJW-tj-i8X" secondAttribute="width" id="apW-2R-3tT"/>
+                                    <constraint firstAttribute="bottom" secondItem="UIe-UF-jRA" secondAttribute="bottom" id="dV8-y2-D2V"/>
+                                    <constraint firstItem="UIe-UF-jRA" firstAttribute="leading" secondItem="xQm-HN-TVi" secondAttribute="leading" constant="20" symbolic="YES" id="lH1-FE-0fU"/>
+                                    <constraint firstItem="UIe-UF-jRA" firstAttribute="top" secondItem="xQm-HN-TVi" secondAttribute="top" id="tXa-fI-QcG"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Rus-xw-rZh"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="WJW-tj-i8X"/>
+                            </scrollView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="zae-Co-WW7">
+                                <rect key="frame" x="188.5" y="212" width="37" height="37"/>
+                                <color key="color" systemColor="systemRedColor"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="CkQ-oW-EfF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CkQ-oW-EfF" firstAttribute="top" secondItem="xQm-HN-TVi" secondAttribute="top" id="46F-x0-mSv"/>
+                            <constraint firstItem="CkQ-oW-EfF" firstAttribute="bottom" secondItem="xQm-HN-TVi" secondAttribute="bottom" id="5j1-4d-7pU"/>
+                            <constraint firstItem="zae-Co-WW7" firstAttribute="centerX" secondItem="nqN-nD-65R" secondAttribute="centerX" id="MgP-aJ-gaa"/>
+                            <constraint firstItem="xQm-HN-TVi" firstAttribute="trailing" secondItem="CkQ-oW-EfF" secondAttribute="trailing" id="QPn-wh-NFU"/>
+                            <constraint firstItem="zae-Co-WW7" firstAttribute="centerY" secondItem="nqN-nD-65R" secondAttribute="centerY" id="Upy-aF-CsO"/>
+                            <constraint firstItem="CkQ-oW-EfF" firstAttribute="leading" secondItem="xQm-HN-TVi" secondAttribute="leading" id="sBy-o5-Oql"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Meal Details" id="p33-Xl-m8B"/>
+                    <size key="freeformSize" width="414" height="1200"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="zae-Co-WW7" id="ReT-oC-0sX"/>
+                        <outlet property="allTextLabel" destination="3Az-dv-HBM" id="CR8-fD-qHf"/>
+                        <outlet property="imageView" destination="nqN-nD-65R" id="rqm-Mb-goe"/>
+                        <outlet property="stackView" destination="UIe-UF-jRA" id="rio-vW-wPD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLk-Uz-rna" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3029" y="80"/>
+            <point key="canvasLocation" x="3028.985507246377" y="79.6875"/>
         </scene>
     </scenes>
     <resources>

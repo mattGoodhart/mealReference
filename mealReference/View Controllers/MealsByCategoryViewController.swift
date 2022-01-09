@@ -16,6 +16,7 @@ class MealsByCategoryViewController: UICollectionViewController {
     var mealImageData : [Data] = []
     var numberOfMeals: Int = 1
     var chosenMealID: String = ""
+    var chosenMealName: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,6 +157,7 @@ class MealsByCategoryViewController: UICollectionViewController {
             let detailsViewController = segue.destination as! MealDetailsViewController
             
             detailsViewController.mealID = self.chosenMealID
+            detailsViewController.mealName = self.chosenMealName
         }
     }
     
