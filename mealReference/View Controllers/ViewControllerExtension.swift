@@ -27,12 +27,10 @@ extension UIViewController {
     func handleActivityIndicator(indicator: UIActivityIndicatorView, viewController: UIViewController, isActive: Bool) {
         if isActive {
             DispatchQueue.main.async {
-             //   indicator.bringSubviewToFront(viewController.view)
                 indicator.startAnimating()
             }
         } else {
             DispatchQueue.main.async {
-              //  indicator.sendSubviewToBack(viewController.view)
                 indicator.stopAnimating()
             }
         }

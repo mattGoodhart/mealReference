@@ -27,6 +27,7 @@
 		74D34297278896C000255E3B /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D34296278896C000255E3B /* ViewControllerExtension.swift */; };
 		74D342992789222900255E3B /* MealCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D342982789222900255E3B /* MealCollectionCell.swift */; };
 		74D3429C278CA1A100255E3B /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D3429B278CA1A100255E3B /* InfoViewController.swift */; };
+		74D3429E278CB66700255E3B /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D3429D278CB66700255E3B /* PDFViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		74D34296278896C000255E3B /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		74D342982789222900255E3B /* MealCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionCell.swift; sourceTree = "<group>"; };
 		74D3429B278CA1A100255E3B /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		74D3429D278CB66700255E3B /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				74D3429227864C1300255E3B /* WelcomeViewController.swift */,
 				74D3429B278CA1A100255E3B /* InfoViewController.swift */,
 				74D34296278896C000255E3B /* ViewControllerExtension.swift */,
+				74D3429D278CB66700255E3B /* PDFViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74D3429E278CB66700255E3B /* PDFViewController.swift in Sources */,
 				74D3428E278612FA00255E3B /* MealsByCategoryViewController.swift in Sources */,
 				74D3429327864C1300255E3B /* WelcomeViewController.swift in Sources */,
 				74D342882784F43300255E3B /* MealsByCategoryResponse.swift in Sources */,

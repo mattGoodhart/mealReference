@@ -124,6 +124,10 @@
                                             <action selector="resumeTapped" destination="s20-YH-MI0" eventType="touchUpInside" id="r8r-TI-UKS"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="gt4-aA-fMG">
+                                        <rect key="frame" x="188.5" y="409" width="37" height="0.0"/>
+                                        <color key="color" red="0.99218529460000005" green="0.88626468179999995" blue="0.39221894740000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EI2-Jc-4os" userLabel="Linkedin">
                                         <rect key="frame" x="157" y="409" width="100.5" height="204.5"/>
                                         <state key="normal" title="Button"/>
@@ -158,6 +162,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="gt4-aA-fMG" id="zRp-w6-Wjp"/>
                         <outlet property="linkedInButton" destination="EI2-Jc-4os" id="iOy-5c-uJN"/>
                         <outlet property="resumeButton" destination="Eeg-k6-pot" id="SvI-Tz-kPJ"/>
                         <outlet property="seeTheCodeButton" destination="Ylm-PT-hfF" id="Sgz-DA-fA1"/>
@@ -167,6 +172,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQR-0A-Nkp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="725" y="746"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="uxm-1b-5Y9">
+            <objects>
+                <viewController storyboardIdentifier="PDFViewController" id="Ure-ns-8j9" customClass="PDFViewController" customModule="mealReference" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LLR-ol-cic">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qxh-lv-SUy" userLabel="PDF View" customClass="PDFView">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="dFc-Pn-JXy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="pdfView" destination="qxh-lv-SUy" id="llG-3R-0Eq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o0C-ea-dfG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1500" y="746"/>
         </scene>
         <!--Categories Collection View Controller-->
         <scene sceneID="9Dr-UI-Les">
