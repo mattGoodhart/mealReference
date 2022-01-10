@@ -10,7 +10,7 @@ import UIKit
 class CategoriesCollectionViewController: UICollectionViewController {
     
     var mealsInChosenCategory: [MealResults]!
-    var allCategories : [MealCategory]!
+    var allCategories : [MealCategory]! // sent with segue
     var categoryImageData: [Data] = []
     var numberOfCategories: Int = 0
     var chosenCategory: String = ""
@@ -20,6 +20,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         numberOfCategories = allCategories.count
+        collectionView.reloadData()
         getPhotosFromTheMealDB()
     }
 
@@ -93,7 +94,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
             handleActivityIndicator(indicator: cell.activityIndicator, viewController: self, isActive: false)
         }
         
-        cell.textView.text = allCategories[indexPath.item].category
+        cell.label.text = allCategories[indexPath.item].category
         return cell
     }
     

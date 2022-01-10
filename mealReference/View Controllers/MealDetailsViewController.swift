@@ -24,6 +24,7 @@ class MealDetailsViewController: UIViewController {
     var mealName: String = ""
     var chosenMealDetails: MealDetailResults!
     var newIngredientsAndMeasures: [String] = []
+    var formattedInstructions: String = ""
     
     
     override func viewDidLoad() {
@@ -94,7 +95,7 @@ class MealDetailsViewController: UIViewController {
             newIngredientsText += item
         }
         
-        allTextLabel.text = newIngredientsText + "\n\n\n\n" + chosenMealDetails.instructions
+        allTextLabel.text = newIngredientsText + "\n\n\n ------==============------ \n\n\n\n" + formattedInstructions
         
         
        // self.ingredientsLabel.text = newIngredientsText
@@ -113,6 +114,7 @@ class MealDetailsViewController: UIViewController {
     
     func parseMealDetails() {
         
+        //var spacedInstructions: String = ""
         var cleanIngredientsStringArray: [String] = []
         var cleanMeasuresStringArray: [String] = []
         let mirror = Mirror(reflecting: self.chosenMealDetails!)
@@ -129,7 +131,10 @@ class MealDetailsViewController: UIViewController {
                     }
                 }
                 
+                formattedInstructions = chosenMealDetails.instructions.replacingOccurrences(of: "\n", with: "\n\n")
                 newIngredientsAndMeasures = zip(cleanIngredientsStringArray, cleanMeasuresStringArray).map(+)
+                
+                
                 
             }
         }

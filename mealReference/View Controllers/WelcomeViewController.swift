@@ -50,6 +50,8 @@ class WelcomeViewController: UIViewController {
                 self.allCategories.append(mealCategory)
             }
             
+            self.allCategories.sort { $0.category < $1.category }
+            
           //  print(self.allCategories)
             self.handleActivityIndicator(indicator: self.activityIndicator, viewController: self, isActive: false)
             self.handleButton(button: self.getStartedButton, isEnabled: true)
