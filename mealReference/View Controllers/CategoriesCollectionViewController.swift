@@ -44,22 +44,13 @@ class CategoriesCollectionViewController: UICollectionViewController {
             guard let response = response else {
                 print("Error fetching Meals by Categories Response from theMealDB")
                 print(error as Any)
-              //  self.handleActivityIndicator(indicator: self.activityIndicator, viewController: self, isActive: true)
                 return // add alert message?
             }
             
             for meal in response.meals {
-               
                 self.mealsInChosenCategory.append(meal)
-               // collectionView.reloadData()
             }
-            
-            
-//            self.numberOfMeals = self.mealsInThisCategory.count
-//            self.collectionView.reloadData()
         }
-      //  handleActivityIndicator(indicator: activityIndicator, viewController: self, isActive: false)
-     
     }
     
     

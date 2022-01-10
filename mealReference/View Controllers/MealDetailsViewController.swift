@@ -13,12 +13,10 @@ class MealDetailsViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var areaLabel: UILabel!
     @IBOutlet weak var allTextLabel: UILabel!
-    
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var youtubeButton: UIButton!
 
-   
-    
     var mealDetailsBaseURLString: String = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
     var mealID: String = ""
     var mealName: String = ""
@@ -35,7 +33,12 @@ class MealDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-      //  rebuildStackView()
+       // rebuildStackView()
+       // let offset = imageView.frame.maxY - view.frame.minY
+     
+        //scrollView.setContentOffset(CGPoint(x: 0,y: offset), animated: false)
+       // let imageTop = CGPoint(x: imageView.center.x, y: imageView.)
+      
     }
     
     func loadYoutube(videoURLString: String) {
@@ -68,7 +71,6 @@ class MealDetailsViewController: UIViewController {
             stackView.removeArrangedSubview(view)
         }
         
-        
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(allTextLabel)
        // stackView.addArrangedSubview(areaLabel)
@@ -86,11 +88,8 @@ class MealDetailsViewController: UIViewController {
     
     func setUpView() {
         var newIngredientsText: String = ""
-        self.navigationItem.title = self.chosenMealDetails.mealName
-       // self.areaLabel.text = self.chosenMealDetails.area
-      //  self.instructionsTextView.text = self.chosenMealDetails.instructions
-      
-        
+        self.navigationItem.title = self.chosenMealDetails.mealName.capitalized
+    
         for item in newIngredientsAndMeasures {
             newIngredientsText += item
         }
@@ -124,8 +123,10 @@ class MealDetailsViewController: UIViewController {
             if let label = child.label, let value = child.value as? String {
                 
                 if (value != "" && value != " " && value != "  ")  {
+                    
                     if label.prefix(10) == "ingredient" {
                         cleanIngredientsStringArray.append(value + " - ")
+                        
                     } else if label.prefix(7) == "measure" {
                         cleanMeasuresStringArray.append(value + "\n")
                     }
@@ -133,9 +134,6 @@ class MealDetailsViewController: UIViewController {
                 
                 formattedInstructions = chosenMealDetails.instructions.replacingOccurrences(of: "\n", with: "\n\n")
                 newIngredientsAndMeasures = zip(cleanIngredientsStringArray, cleanMeasuresStringArray).map(+)
-                
-                
-                
             }
         }
         setUpView()

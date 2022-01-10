@@ -20,6 +20,7 @@ class MealsByCategoryViewController: UICollectionViewController {
     var previewURL: URL!
     var mainImageURL: URL!
     var upperCasedMealNames: [String] = []
+    var mealNames: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +41,10 @@ class MealsByCategoryViewController: UICollectionViewController {
                 }
             }
             else {
-                print("Preview Photo Download Failure for \(previewURL.path), Grabbing the Main Photo Instead")
+                print("Preview photo download failure for \(previewURL.path), Grabbing the larger photo instead")
                 
                 guard let mainImageData = try? Data(contentsOf: self.mainImageURL) else {
-                    print("Main Photo Download Also Failed")
+                    print("Main photo download also failed")
                     return
                 }
                 DispatchQueue.main.async {
@@ -73,12 +74,20 @@ class MealsByCategoryViewController: UICollectionViewController {
             
             for meal in response.meals {
                 self.mealsInThisCategory.append(meal)
-                self.upperCasedMealNames.append(meal.mealName.capitalized)
+                self.mealNames.append(meal.mealName)
+              //  self.upperCasedMealNames.append(meal.mealName.capitalized)
             }
             
             self.numberOfMeals = self.mealsInThisCategory.count
-            self.mealsInThisCategory.sort { $0.mealName < $1.mealName } // this isnt working when secondary image is used?
-            self.upperCasedMealNames.sort { $0 < $1 }
+            self.mealsInThisCategory.sort { $0.mealName < $1.mealName }
+            self.mealNames.sort { $0 < $1 }
+            
+            
+            // have to capitalize after sorting to prevent sorting errors
+            for mealName in self.mealNames {
+                self.upperCasedMealNames.append(mealName.capitalized)
+            }
+    
             self.getPhotosFromTheMealDB()
         }
      

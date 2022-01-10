@@ -11,6 +11,7 @@ class WelcomeViewController: UIViewController {
     
     @IBOutlet weak var getStartedButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var infoButon: UIButton!
     
     let categoriesURLString = "https://www.themealdb.com/api/json/v1/1/categories.php"
     var allCategories: [MealCategory] = []
@@ -58,7 +59,12 @@ class WelcomeViewController: UIViewController {
         }
     }
     
-
+    @IBAction func infoButtonTapped(sender: UIButton) {
+        let popOverViewController = storyboard!.instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
+        
+        present(popOverViewController, animated: true, completion: nil)
+        
+    }
     
     @IBAction func getStartedButtonTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "segueToCategories", sender: sender)

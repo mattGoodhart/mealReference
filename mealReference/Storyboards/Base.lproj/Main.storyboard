@@ -47,6 +47,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3f-hl-iLQ" userLabel="About Button">
                                 <rect key="frame" x="189" y="538" width="36" height="31"/>
                                 <buttonConfiguration key="configuration" style="gray" image="info" catalog="system"/>
+                                <connections>
+                                    <action selector="infoButtonTappedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oud-Mr-J8v"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btA-a9-zIE">
                                 <rect key="frame" x="118.5" y="449.5" width="177.5" height="51"/>
@@ -86,12 +89,84 @@
                     <connections>
                         <outlet property="activityIndicator" destination="LP0-xl-zka" id="Ik0-x0-v5W"/>
                         <outlet property="getStartedButton" destination="btA-a9-zIE" id="R8u-RS-GwX"/>
+                        <outlet property="infoButon" destination="N3f-hl-iLQ" id="nzB-kQ-ZDT"/>
                         <segue destination="myI-Up-GNd" kind="show" identifier="segueToCategories" id="mWm-DK-w9M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="724.63768115942037" y="79.6875"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="rWX-0t-aKD">
+            <objects>
+                <viewController storyboardIdentifier="InfoViewController" id="s20-YH-MI0" customClass="InfoViewController" customModule="mealReference" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" alpha="0.75" contentMode="scaleToFill" id="nQO-f1-MAG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jEB-cj-kOh">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3W-cT-xHu" userLabel="Thank You">
+                                        <rect key="frame" x="183.5" y="0.0" width="47" height="204.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eeg-k6-pot" userLabel="Resume">
+                                        <rect key="frame" x="147.5" y="204.5" width="119.5" height="204.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="doc.text" catalog="system" title="My Resume">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="resumeTapped" destination="s20-YH-MI0" eventType="touchUpInside" id="r8r-TI-UKS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EI2-Jc-4os" userLabel="Linkedin">
+                                        <rect key="frame" x="157" y="409" width="100.5" height="204.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="link" catalog="system" title="Linkedin">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="linkedinTapped" destination="s20-YH-MI0" eventType="touchUpInside" id="hYK-ti-jba"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ylm-PT-hfF" userLabel="Code">
+                                        <rect key="frame" x="97" y="613.5" width="220" height="204.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="See the Code for this App">
+                                            <imageReference key="image" image="chevron.left.slash.chevron.right" catalog="system" symbolScale="large"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="seeTheCodeTapped" destination="s20-YH-MI0" eventType="touchUpInside" id="MNd-r9-O93"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="AnU-hS-KRH"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jEB-cj-kOh" firstAttribute="leading" secondItem="AnU-hS-KRH" secondAttribute="leading" id="0So-rg-W5z"/>
+                            <constraint firstItem="jEB-cj-kOh" firstAttribute="top" secondItem="AnU-hS-KRH" secondAttribute="top" id="X8H-iz-qdE"/>
+                            <constraint firstItem="AnU-hS-KRH" firstAttribute="trailing" secondItem="jEB-cj-kOh" secondAttribute="trailing" id="y4S-u7-0Rw"/>
+                            <constraint firstItem="AnU-hS-KRH" firstAttribute="bottom" secondItem="jEB-cj-kOh" secondAttribute="bottom" id="yFM-7R-J82"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="linkedInButton" destination="EI2-Jc-4os" id="iOy-5c-uJN"/>
+                        <outlet property="resumeButton" destination="Eeg-k6-pot" id="SvI-Tz-kPJ"/>
+                        <outlet property="seeTheCodeButton" destination="Ylm-PT-hfF" id="Sgz-DA-fA1"/>
+                        <outlet property="thankYou" destination="D3W-cT-xHu" id="Z7q-4y-hmd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gQR-0A-Nkp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="725" y="746"/>
         </scene>
         <!--Categories Collection View Controller-->
         <scene sceneID="9Dr-UI-Les">
@@ -294,6 +369,7 @@
                         <outlet property="activityIndicator" destination="zae-Co-WW7" id="ReT-oC-0sX"/>
                         <outlet property="allTextLabel" destination="3Az-dv-HBM" id="CR8-fD-qHf"/>
                         <outlet property="imageView" destination="nqN-nD-65R" id="rqm-Mb-goe"/>
+                        <outlet property="scrollView" destination="xQm-HN-TVi" id="AUa-Ux-gP1"/>
                         <outlet property="stackView" destination="UIe-UF-jRA" id="rio-vW-wPD"/>
                     </connections>
                 </viewController>
@@ -303,8 +379,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.left.slash.chevron.right" catalog="system" width="128" height="83"/>
+        <image name="doc.text" catalog="system" width="115" height="128"/>
         <image name="greetingcard.fill" catalog="system" width="106" height="128"/>
         <image name="info" catalog="system" width="93" height="128"/>
+        <image name="link" catalog="system" width="128" height="122"/>
         <image name="menucard.fill" catalog="system" width="106" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
