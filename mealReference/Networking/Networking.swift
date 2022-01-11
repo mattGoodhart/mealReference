@@ -7,26 +7,6 @@
 
 import Foundation
 
-//
-//enum EndPoints {
-//
-//    static let base = "https://www.themealdb.com/api/json/v1/1"
-//
-//    case categories
-//    case filterByCategory
-//    case mealDetails
-//
-//    var stringValue: String {
-//        switch self {
-//        case .categories: return: EndPoints.base + "categories.php"
-//        case .
-//
-//        }
-//    }
-//}
-
-
-
 class Networking {
     
     static let shared = Networking()
