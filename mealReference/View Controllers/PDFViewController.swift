@@ -10,7 +10,6 @@ import PDFKit
 
 class PDFViewController: UIViewController {
     
-
 @IBOutlet weak var pdfView: PDFView!
 
 var resumeData: Data!

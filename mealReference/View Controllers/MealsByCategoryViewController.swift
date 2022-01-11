@@ -76,9 +76,9 @@ class MealsByCategoryViewController: UICollectionViewController {
         Networking.shared.taskForJSON(url: url, responseType: MealsByCategoryResponse.self) { response, error in
             
             guard let response = response else {
-                print("Error fetching Meals by Categories Response from theMealDB")
+                self.showAlert(message: "Error fetching Meals by Categories Response from theMealDB", title: "Sorry")
                 print(error as Any)
-                return // add alert message?
+                return
             }
             
             for meal in response.meals {

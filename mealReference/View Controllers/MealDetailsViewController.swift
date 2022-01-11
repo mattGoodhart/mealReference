@@ -11,12 +11,10 @@ class MealDetailsViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
- //   @IBOutlet weak var areaLabel: UILabel!
     @IBOutlet weak var allTextLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
-    //@IBOutlet weak var youtubeButton: UIButton!
-
+    
     let model = MealReferenceModel.shared
     var mealDetailsBaseURLString: String = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
     var mealID: String = ""
@@ -31,27 +29,16 @@ class MealDetailsViewController: UIViewController {
         fetchMealDetailsIfNeeded()
     }
     
-//    func loadYoutube(videoURLString: String) {
-//        guard let youtubeURL = URL(string: videoURLString) else {
-//            return
-//        }
-//        UIApplication.shared.open(youtubeURL, options: [:], completionHandler: nil)
-//    }
-    
-//    @IBAction func youtubeButtonTapped(sender: UIButton) {
-//        loadYoutube(videoURLString: chosenMealDetails.youtubeURLString)
-//    }
-
-    func loadPhotoFromURL(url: URL) {
+    func loadDetailPhotoFromURL(url: URL) {
         
-        guard let imageData = try? Data(contentsOf: url) else {
-            print("Photo Download Failure")
-            return
-        }
-        
-        DispatchQueue.main.async {
-            let image = UIImage(data: imageData)
-            self.model.mealImageDataByID[self.mealID] = imageData
+        Networking.shared.fetchData(at: url) { data in
+            
+            guard let data = data else {
+                print("Photo Download Failure")
+                return
+            }
+            let image = UIImage(data: data)
+            self.model.mealImageDataByID[self.mealID] = data
             self.imageView.image = image
             self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
         }
@@ -61,29 +48,19 @@ class MealDetailsViewController: UIViewController {
         for view in stackView.subviews {
             stackView.removeArrangedSubview(view)
         }
-        
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(allTextLabel)
     }
     
-//    func placeYoutubeButton() {
-//        youtubeButton.translatesAutoresizingMaskIntoConstraints = false
-//        youtubeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
-//        youtubeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-//    }
-    
     func setUpView() {
-
         makeCleanLabelText()
-        
         let urlString = self.chosenMealDetails.mealImageURL
         
         if let url = URL(string: urlString) {
-            self.loadPhotoFromURL(url: url)
+            self.loadDetailPhotoFromURL(url: url)
         }
         rebuildStackView()
     }
-
     
     func parseMealDetails() {
         
@@ -137,33 +114,33 @@ class MealDetailsViewController: UIViewController {
             }
             
             handleActivityIndicator(indicator: activityIndicator, isActive: false)
+            return
+        }
+        
+        guard let url = URL(string: mealDetailsBaseURLString + mealID) else {
+            print("Couldnt Create URL for Meal Details")
+            return
+        }
+        
+        print("fetching meal details")
+        Networking.shared.taskForJSON(url: url, responseType: MealDetailsResponse.self) { response, error in
+            
+            guard let response = response else {
+                self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
+                self.showAlert(message: "Error fetching Meal Details Response from theMealDB", title: "oops")
+                print(error as Any)
                 return
             }
-            
-            guard let url = URL(string: mealDetailsBaseURLString + mealID) else {
-                print("Couldnt Create URL for Meal Details")
-                return
-            }
-            
-            print("fetching meal details")
-            Networking.shared.taskForJSON(url: url, responseType: MealDetailsResponse.self) { response, error in
-                
-                guard let response = response else {
-                    print("Error fetching Meal Details Response from theMealDB")
-                    print(error as Any)
-                    self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
-                    return // add alert message?
-                }
-                self.chosenMealDetails = response.meals.first
-                self.model.mealDetailInfoByID[self.mealID] = self.chosenMealDetails
-                self.parseMealDetails()
-            }
+            self.chosenMealDetails = response.meals.first
+            self.model.mealDetailInfoByID[self.mealID] = self.chosenMealDetails
+            self.parseMealDetails()
         }
     }
-    
-    
-    
-    
-    
-    
+}
+
+
+
+
+
+
 

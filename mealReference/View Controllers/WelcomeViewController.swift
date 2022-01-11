@@ -39,10 +39,10 @@ class WelcomeViewController: UIViewController {
         Networking.shared.taskForJSON(url: url, responseType: CategoriesResponse.self) { response, error in
             
             guard let response = response else {
-                print("Error fetching CategoriesResponse from theMealDB")
+                self.showAlert(message: "Error fetching CategoriesResponse from theMealDB", title: "Whoops")
                 print(error as Any)
                 self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
-                return // add alert message?
+                return
             }
             
             for mealCategory in response.categories {

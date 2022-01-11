@@ -46,36 +46,15 @@ class CategoriesCollectionViewController: UICollectionViewController {
         }
     }
     
-    func fetchMealsByCategory() {
-        guard let url = URL(string: mealsByCategoryBaseURLString + chosenCategory) else {
-            print("Couldnt create URL from mealsByCategoryBaseURLString")
-            return
-        }
-        
-        print("fetching meals")
-        Networking.shared.taskForJSON(url: url, responseType: MealsByCategoryResponse.self) { response, error in
-            
-            guard let response = response else {
-                print("Error fetching Meals by Categories Response from theMealDB")
-                print(error as Any)
-                return // add alert message?
-            }
-            
-            for meal in response.meals {
-                self.mealsInChosenCategory.append(meal)
-            }
-        }
-    }
-    
     func loadPhotoFromURL(url: URL) {
         
-        guard let imageData = try? Data(contentsOf: url) else {
-            print("Photo Download Failure")
-            return
-        }
-        
-        DispatchQueue.main.async {
-            self.model.categoryImageData.append(imageData)
+        Networking.shared.fetchData(at: url) { data in
+            
+            guard let data = data else {
+                print("Photo Download Failure")
+                return
+            }
+            self.model.categoryImageData.append(data)
             self.collectionView.reloadData()
         }
     }
@@ -91,20 +70,15 @@ class CategoriesCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionCell
         
         if model.categoryImageData.indices.contains(indexPath.item), let image = UIImage(data: model.categoryImageData[indexPath.item]) {
-            
             cell.imageView.image = image
             handleActivityIndicator(indicator: cell.activityIndicator, isActive: false)
         }
-        
         cell.label.text = allCategories[indexPath.item].category
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         chosenCategory = allCategories[indexPath.item].category
-        //activity indicator
-     //   fetchMealsByCategory()
         performSegue(withIdentifier: "SegueToMealsByCategoryView", sender: self)
     }
     
@@ -112,7 +86,6 @@ class CategoriesCollectionViewController: UICollectionViewController {
         if segue.identifier == "SegueToMealsByCategoryView" {
             let mealsByCategoryViewController = segue.destination as! MealsByCategoryViewController
             mealsByCategoryViewController.thisCategory = chosenCategory
-        //    mealsByCategoryViewController.mealsInThisCategory = mealsInChosenCategory // not there yet...
         }
     }
 }
