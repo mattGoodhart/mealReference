@@ -9,6 +9,7 @@ import UIKit
 
 class CategoriesCollectionViewController: UICollectionViewController {
     
+    let model = MealReferenceModel.shared
     var mealsInChosenCategory: [MealResults]!
     var allCategories : [MealCategory]! // sent with segue
     var categoryImageData: [Data] = []
@@ -19,18 +20,34 @@ class CategoriesCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberOfCategories = allCategories.count
+        initializeCategoriesCollection()
+      
         collectionView.reloadData()
         getPhotosFromTheMealDB()
     }
 
-        func getPhotosFromTheMealDB() -> Void {
-            for category in allCategories {
-                if let photoURL = URL(string: category.categoryImageString) {
-                    self.loadPhotoFromURL(url: photoURL)
-                }
+    func initializeCategoriesCollection() {
+        allCategories = model.allCategories
+        numberOfCategories = allCategories.count
+        categoryImageData = model.categoryImageData
+    }
+    
+    func getPhotosFromTheMealDB() -> Void {
+        guard categoryImageData.isEmpty  else {
+            return
+        }
+        
+//        guard categoryImageData.isEmpty else {// bah
+//            return
+//        }
+        print("getting category photos")
+        for category in allCategories {
+            if let photoURL = URL(string: category.categoryImageString) {
+                self.loadPhotoFromURL(url: photoURL)
             }
         }
+        
+    }
     
     func fetchMealsByCategory() {
         guard let url = URL(string: mealsByCategoryBaseURLString + chosenCategory) else {
@@ -62,7 +79,8 @@ class CategoriesCollectionViewController: UICollectionViewController {
         }
         
         DispatchQueue.main.async {
-            self.categoryImageData.append(imageData)
+            self.model.categoryImageData.append(imageData)
+          //  self.categoryImageData.append(imageData)
             self.collectionView.reloadData()
         }
         
@@ -79,10 +97,10 @@ class CategoriesCollectionViewController: UICollectionViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionCell
         
-        if categoryImageData.indices.contains(indexPath.item), let image = UIImage(data: categoryImageData[indexPath.item]) {
+        if model.categoryImageData.indices.contains(indexPath.item), let image = UIImage(data: model.categoryImageData[indexPath.item]) {
             
             cell.imageView.image = image
-            handleActivityIndicator(indicator: cell.activityIndicator, viewController: self, isActive: false)
+            handleActivityIndicator(indicator: cell.activityIndicator, isActive: false)
         }
         
         cell.label.text = allCategories[indexPath.item].category

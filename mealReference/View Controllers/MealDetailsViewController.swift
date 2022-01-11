@@ -62,7 +62,7 @@ class MealDetailsViewController: UIViewController {
         DispatchQueue.main.async {
             let image = UIImage(data: imageData)
             self.imageView.image = image
-            self.handleActivityIndicator(indicator: self.activityIndicator, viewController: self, isActive: false)
+            self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
         }
     }
     func rebuildStackView() {
@@ -153,7 +153,7 @@ class MealDetailsViewController: UIViewController {
                 guard let response = response else {
                     print("Error fetching Meal Details Response from theMealDB")
                     print(error as Any)
-                    self.handleActivityIndicator(indicator: self.activityIndicator, viewController: self, isActive: false)
+                    self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
                     return // add alert message?
                 }
                 self.chosenMealDetails = response.meals.first

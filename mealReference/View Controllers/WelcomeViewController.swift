@@ -14,21 +14,23 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var infoButon: UIButton!
     
     let categoriesURLString = "https://www.themealdb.com/api/json/v1/1/categories.php"
-    var allCategories: [MealCategory] = []
+    let model = MealReferenceModel.shared
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // activityIndicator.hidesWhenStopped = true
-        
-        // stop activity indicator if needed
-        
-      //  getStartedButton.isEnabled = false
-        fetchCategoriesFromAPI() // if needed?
+        fetchCategoriesFromAPIifNeeded()
     }
     
-    private func fetchCategoriesFromAPI() {
+    private func fetchCategoriesFromAPIifNeeded() {
       
+        guard model.allCategories.isEmpty else {
+            return
+        }
+        
+        
+        var allCategories: [MealCategory] = []
         guard let url = URL(string: categoriesURLString) else {
             print("couldn't create URL from categoriesURLString")
             return
@@ -43,18 +45,19 @@ class WelcomeViewController: UIViewController {
             guard let response = response else {
                 print("Error fetching CategoriesResponse from theMealDB")
                 print(error as Any)
-                self.handleActivityIndicator(indicator: self.activityIndicator, viewController: self, isActive: false)
+                self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
                 return // add alert message?
             }
             
             for mealCategory in response.categories {
-                self.allCategories.append(mealCategory)
+                allCategories.append(mealCategory)
             }
             
-            self.allCategories.sort { $0.category < $1.category }
+            allCategories.sort { $0.category < $1.category }
+            self.model.allCategories = allCategories
             
           //  print(self.allCategories)
-            self.handleActivityIndicator(indicator: self.activityIndicator, viewController: self, isActive: false)
+            self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
             self.handleButton(button: self.getStartedButton, isEnabled: true)
         }
     }
@@ -69,13 +72,18 @@ class WelcomeViewController: UIViewController {
     @IBAction func getStartedButtonTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "segueToCategories", sender: sender)
         
+//        let categoriesViewController = storyboard!.instantiateViewController(withIdentifier: "InfoViewController") as! CategoriesCollectionViewController
+//        categoriesViewController.allCategories = allCategories
+//        categoriesViewController.categoryImageData
+//
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToCategories" {
             
             let categoriesViewController = segue.destination as! CategoriesCollectionViewController
-            categoriesViewController.allCategories = allCategories
+            categoriesViewController.allCategories = model.allCategories
+           // categoriesViewController.categoryImageData
         }
     }
     

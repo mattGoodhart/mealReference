@@ -16,13 +16,13 @@ struct MealCategory: Codable {
     let category: String
     let categoryImageString: String
     let categoryDescription: String
-    let imageData: Data?
+    //let imageData: Data?
     
     enum CodingKeys: String, CodingKey {
         case categoryID = "idCategory"
         case category = "strCategory"
         case categoryImageString = "strCategoryThumb"
         case categoryDescription = "strCategoryDescription"
-        case imageData
+     //   case imageData
     }
 }

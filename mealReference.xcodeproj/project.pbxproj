@@ -28,6 +28,7 @@
 		74D342992789222900255E3B /* MealCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D342982789222900255E3B /* MealCollectionCell.swift */; };
 		74D3429C278CA1A100255E3B /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D3429B278CA1A100255E3B /* InfoViewController.swift */; };
 		74D3429E278CB66700255E3B /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D3429D278CB66700255E3B /* PDFViewController.swift */; };
+		74D342A1278CE34600255E3B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D342A0278CE34600255E3B /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		74D342982789222900255E3B /* MealCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionCell.swift; sourceTree = "<group>"; };
 		74D3429B278CA1A100255E3B /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		74D3429D278CB66700255E3B /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		74D342A0278CE34600255E3B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				74D342532784EC4300255E3B /* AppDelegate.swift */,
 				74D342552784EC4300255E3B /* SceneDelegate.swift */,
 				74D3429A2789365900255E3B /* View */,
+				74D3429F278CE33300255E3B /* Model */,
 				74D342912786433400255E3B /* View Controllers */,
 				74D3428B2786102400255E3B /* Networking */,
 				74D3428C2786117700255E3B /* Storyboards */,
@@ -193,6 +196,14 @@
 				74D342982789222900255E3B /* MealCollectionCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		74D3429F278CE33300255E3B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				74D342A0278CE34600255E3B /* Model.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,6 +344,7 @@
 				74D342582784EC4300255E3B /* CategoriesCollectionViewController.swift in Sources */,
 				74D342542784EC4300255E3B /* AppDelegate.swift in Sources */,
 				74D342902786132500255E3B /* MealDetailsViewController.swift in Sources */,
+				74D342A1278CE34600255E3B /* Model.swift in Sources */,
 				74D342992789222900255E3B /* MealCollectionCell.swift in Sources */,
 				74D342862784F1B900255E3B /* CategoriesResponse.swift in Sources */,
 				74D342562784EC4300255E3B /* SceneDelegate.swift in Sources */,

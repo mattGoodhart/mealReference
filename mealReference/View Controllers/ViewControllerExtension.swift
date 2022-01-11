@@ -24,7 +24,7 @@ extension UIViewController {
         }
     }
     
-    func handleActivityIndicator(indicator: UIActivityIndicatorView, viewController: UIViewController, isActive: Bool) {
+    func handleActivityIndicator(indicator: UIActivityIndicatorView, isActive: Bool) {
         if isActive {
             DispatchQueue.main.async {
                 indicator.startAnimating()

@@ -10,6 +10,7 @@ import SafariServices
 
 class InfoViewController: UIViewController {
     
+    @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var thankYou: UILabel!
     @IBOutlet weak var resumeButton: UIButton!
     @IBOutlet weak var linkedInButton: UIButton!
@@ -19,8 +20,8 @@ class InfoViewController: UIViewController {
     var resumeData: Data!
     
     override func viewDidLoad() {
-        thankYou.text = "mealReference app by Matt Goodhart, January 2022\n\nfor the Fetch Rewards iOS Coding Challenge\nas part of his application to the iOS Engineer Apprenticeship"
-        
+        aboutLabel.text = "mealReference app by Matt Goodhart, January 2022\n\nfor the Fetch Rewards iOS Coding Challenge\nas part of his application to the iOS Engineer Apprenticeship"
+        thankYou.text = "Thank you for the opportunity!"
         activityIndicator.isHidden = true
     }
     @IBAction func seeTheCodeTapped() {
@@ -33,15 +34,16 @@ class InfoViewController: UIViewController {
     }
     
     @IBAction func resumeTapped() {
-
+        
+        
         let resumeURLString = "https://drive.google.com/u/0/uc?id=1NxNt1KZdMnr09gLhOmq48s9t43MRxxnf&export=download"
         
         guard let resumeURL = URL(string: resumeURLString) else {
-        
+            
             //fire alert vc
             return
         }
-        fetchResume(url: resumeURL)
+        fetchResumeIfNeededAndSegue(url: resumeURL)
     }
     
     func loadLinkedIn(linkedInURLString: String) {
@@ -61,25 +63,32 @@ class InfoViewController: UIViewController {
         present(safariViewController, animated: true, completion: nil)
     }
     
-    func fetchResume(url: URL) {
+    func fetchResumeIfNeededAndSegue(url: URL) {
         
-        activityIndicator.isHidden = false
-        // turn on activity indicator
-        Networking.shared.fetchData(at: url) { data in
-            guard let data = data else {
-                print("resume download failure.")
-                self.activityIndicator.isHidden = true
-                return
-            }
-          //  self.resumeData = data
-            self.activityIndicator.isHidden = true
+        if let resumeData = self.resumeData {
             let pdfViewController = self.storyboard!.instantiateViewController(withIdentifier: "PDFViewController") as! PDFViewController
-            pdfViewController.resumeData = data
+            pdfViewController.resumeData = resumeData
             pdfViewController.modalTransitionStyle = .crossDissolve
             self.present(pdfViewController, animated: true, completion: nil)
+        } else {
             
-           // self.moveToPDFViewController(pdfData: data)
-            //turn off activity indicator
+            print("downloading resume")
+            activityIndicator.isHidden = false
+            Networking.shared.fetchData(at: url) { data in
+                
+                guard let data = data else {
+                    print("resume download failure.")
+                    self.activityIndicator.isHidden = true
+                    return
+                }
+                
+                self.resumeData = data
+                self.activityIndicator.isHidden = true
+                let pdfViewController = self.storyboard!.instantiateViewController(withIdentifier: "PDFViewController") as! PDFViewController
+                pdfViewController.resumeData = self.resumeData
+                pdfViewController.modalTransitionStyle = .crossDissolve
+                self.present(pdfViewController, animated: true, completion: nil)
+            }
         }
     }
     
@@ -88,9 +97,5 @@ class InfoViewController: UIViewController {
         pdfViewController.resumeData = resumeData
         pdfViewController.modalTransitionStyle = .crossDissolve
         present(pdfViewController, animated: true, completion: nil)
-        
-        
     }
-    
-    
 }
