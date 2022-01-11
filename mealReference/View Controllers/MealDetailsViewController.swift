@@ -44,15 +44,7 @@ class MealDetailsViewController: UIViewController {
             self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
         }
     }
-    func rebuildStackView() {
-        
-        for view in stackView.subviews {
-            stackView.removeArrangedSubview(view)
-        }
-        stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(allTextLabel)
-    }
-    
+   
     func setUpView() {
         makeCleanLabelText()
         let urlString = self.chosenMealDetails.mealImageURL
@@ -60,7 +52,6 @@ class MealDetailsViewController: UIViewController {
         if let url = URL(string: urlString) {
             self.loadDetailPhotoFromURL(url: url)
         }
-        rebuildStackView()
     }
     
     func parseMealDetails() {
@@ -82,7 +73,6 @@ class MealDetailsViewController: UIViewController {
                         cleanMeasuresStringArray.append(value + "\n")
                     }
                 }
-                
                 formattedInstructions = chosenMealDetails.instructions.replacingOccurrences(of: "\n", with: "\n\n")
                 newIngredientsAndMeasures = zip(cleanIngredientsStringArray, cleanMeasuresStringArray).map(+)
             }
