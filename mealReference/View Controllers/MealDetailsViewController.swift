@@ -26,6 +26,7 @@ class MealDetailsViewController: UIViewController {
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = mealName.capitalized
         fetchMealDetailsIfNeeded()
     }
     

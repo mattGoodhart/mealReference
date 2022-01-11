@@ -40,7 +40,6 @@ class MealsByCategoryViewController: UICollectionViewController {
                     self.model.mealImageDataByCategory[self.thisCategory] = self.mealImageData
                     self.collectionView.reloadData()
                 }
-
             } else {
                 print("Preview photo download failure for \(previewURL.path), Grabbing the larger photo instead")
                 
@@ -127,6 +126,7 @@ class MealsByCategoryViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.chosenMealID = mealsInThisCategory[indexPath.item].mealID
+        self.chosenMealName = mealsInThisCategory[indexPath.item].mealName
         performSegue(withIdentifier: "SegueToDetailViewController", sender: self)
     }
 }
