@@ -16,8 +16,6 @@ class CategoriesCollectionViewController: UICollectionViewController {
     var numberOfCategories: Int = 0
     var chosenCategory: String = ""
 
-    
-    
     //MARK: ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,26 +46,15 @@ class CategoriesCollectionViewController: UICollectionViewController {
     
     func loadPhotoFromURL(url: URL) {
         
-       // Networking.shared.fetchData(at: url) { data in
-            
-            //            guard let data = data else {
-            //                print("Photo Download Failure")
-            //                return
-            //            }
             guard let data = try? Data(contentsOf: url) else {
                 print("Photo Download Failure")
                 return
             }
-            
-            
-            
+        
             self.model.categoryImageData.append(data)
             self.collectionView.reloadData()
         }
-    
-    
 
-    
     //MARK: UICollectionViewDataSource, UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

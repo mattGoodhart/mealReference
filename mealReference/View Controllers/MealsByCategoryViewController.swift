@@ -33,7 +33,6 @@ class MealsByCategoryViewController: UICollectionViewController {
             self.previewURL = URL(string: meal.mealImageString + "/preview")
             self.mainImageURL = URL(string: meal.mealImageString)
             
-            
             if let previewImageData = try? Data(contentsOf: previewURL)  {
                 DispatchQueue.main.async {
                     self.mealImageData.append(previewImageData)
@@ -92,7 +91,6 @@ class MealsByCategoryViewController: UICollectionViewController {
         }
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueToDetailViewController" {
             
@@ -108,7 +106,6 @@ class MealsByCategoryViewController: UICollectionViewController {
         return numberOfMeals
     }
     
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MealCollectionCell", for: indexPath) as! MealCollectionCell
         
@@ -120,7 +117,7 @@ class MealsByCategoryViewController: UICollectionViewController {
         if mealsInThisCategory.indices.contains(indexPath.item) {
             cell.label.text = mealsInThisCategory[indexPath.item].mealName.capitalized
         }
-
+        
         return cell
     }
     

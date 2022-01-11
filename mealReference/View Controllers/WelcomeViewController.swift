@@ -16,14 +16,13 @@ class WelcomeViewController: UIViewController {
     let categoriesURLString = "https://www.themealdb.com/api/json/v1/1/categories.php"
     let model = MealReferenceModel.shared
     
-    
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCategoriesFromAPIifNeeded()
     }
     
-    private func fetchCategoriesFromAPIifNeeded() {
+    func fetchCategoriesFromAPIifNeeded() {
       
         guard model.allCategories.isEmpty else {
             return
