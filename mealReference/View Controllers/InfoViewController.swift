@@ -17,29 +17,30 @@ class InfoViewController: UIViewController {
     @IBOutlet weak var seeTheCodeButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    let resumeURLString = "https://drive.google.com/u/0/uc?id=1NxNt1KZdMnr09gLhOmq48s9t43MRxxnf&export=download"
+    let model = MealReferenceModel.shared
     var resumeData: Data!
     
+    //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         aboutLabel.text = "mealReference app by Matt Goodhart, January 2022\n\nfor the Fetch Rewards iOS Coding Challenge\nas part of his application to the iOS Engineer Apprenticeship"
         thankYou.text = "Thank you for the opportunity!"
         activityIndicator.isHidden = true
     }
+    
     @IBAction func seeTheCodeTapped() {
         let codeURLString =  "https://github.com/mattGoodhart/mealReference"
         presentSafariViewController(urlString: codeURLString)
     }
+    
     @IBAction func linkedinTapped() {
         let linkedInURLString = "https://linkedin.com/in/matthewgoodhart"
         loadLinkedIn(linkedInURLString: linkedInURLString)
     }
     
     @IBAction func resumeTapped() {
-        
-        
-        let resumeURLString = "https://drive.google.com/u/0/uc?id=1NxNt1KZdMnr09gLhOmq48s9t43MRxxnf&export=download"
-        
+     
         guard let resumeURL = URL(string: resumeURLString) else {
-            
             //fire alert vc
             return
         }
@@ -65,7 +66,7 @@ class InfoViewController: UIViewController {
     
     func fetchResumeIfNeededAndSegue(url: URL) {
         
-        if let resumeData = self.resumeData {
+        if let resumeData = self.model.myResume {
             let pdfViewController = self.storyboard!.instantiateViewController(withIdentifier: "PDFViewController") as! PDFViewController
             pdfViewController.resumeData = resumeData
             pdfViewController.modalTransitionStyle = .crossDissolve
@@ -82,10 +83,11 @@ class InfoViewController: UIViewController {
                     return
                 }
                 
-                self.resumeData = data
+                //self.resumeData = data
+                self.model.myResume = data
                 self.activityIndicator.isHidden = true
                 let pdfViewController = self.storyboard!.instantiateViewController(withIdentifier: "PDFViewController") as! PDFViewController
-                pdfViewController.resumeData = self.resumeData
+                pdfViewController.resumeData = data
                 pdfViewController.modalTransitionStyle = .crossDissolve
                 self.present(pdfViewController, animated: true, completion: nil)
             }

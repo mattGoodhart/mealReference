@@ -21,5 +21,4 @@ class MealCollectionCell: UICollectionViewCell {
         label.text = "Meal"
         imageView.image = UIImage(systemName: "greetingcard.fill")
     }
-    
 }

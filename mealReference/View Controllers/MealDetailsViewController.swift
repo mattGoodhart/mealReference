@@ -11,11 +11,11 @@ class MealDetailsViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var areaLabel: UILabel!
+ //   @IBOutlet weak var areaLabel: UILabel!
     @IBOutlet weak var allTextLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var youtubeButton: UIButton!
+    //@IBOutlet weak var youtubeButton: UIButton!
 
     let model = MealReferenceModel.shared
     var mealDetailsBaseURLString: String = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
@@ -25,33 +25,22 @@ class MealDetailsViewController: UIViewController {
     var newIngredientsAndMeasures: [String] = []
     var formattedInstructions: String = ""
     
-    
+    //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         fetchMealDetailsIfNeeded()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       // rebuildStackView()
-       // let offset = imageView.frame.maxY - view.frame.minY
-     
-        //scrollView.setContentOffset(CGPoint(x: 0,y: offset), animated: false)
-       // let imageTop = CGPoint(x: imageView.center.x, y: imageView.)
-      
-    }
+//    func loadYoutube(videoURLString: String) {
+//        guard let youtubeURL = URL(string: videoURLString) else {
+//            return
+//        }
+//        UIApplication.shared.open(youtubeURL, options: [:], completionHandler: nil)
+//    }
     
-    func loadYoutube(videoURLString: String) {
-        guard let youtubeURL = URL(string: videoURLString) else {
-            return
-        }
-        UIApplication.shared.open(youtubeURL, options: [:], completionHandler: nil)
-    }
-    
-    @IBAction func youtubeButtonTapped(sender: UIButton) {
-        loadYoutube(videoURLString: chosenMealDetails.youtubeURLString)
-    }
+//    @IBAction func youtubeButtonTapped(sender: UIButton) {
+//        loadYoutube(videoURLString: chosenMealDetails.youtubeURLString)
+//    }
 
     func loadPhotoFromURL(url: URL) {
         
@@ -75,47 +64,29 @@ class MealDetailsViewController: UIViewController {
         
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(allTextLabel)
-       // stackView.addArrangedSubview(areaLabel)
-//        stackView.addArrangedSubview(youtubeButton)
-   
-        //stackView.addArrangedSubview(ingredientsLabel)
-     //   stackView.addArrangedSubview(instructionsTextView)
     }
     
-    func placeYoutubeButton() {
-        youtubeButton.translatesAutoresizingMaskIntoConstraints = false
-        youtubeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
-        youtubeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-    }
+//    func placeYoutubeButton() {
+//        youtubeButton.translatesAutoresizingMaskIntoConstraints = false
+//        youtubeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
+//        youtubeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+//    }
     
     func setUpView() {
-//        var newIngredientsText: String = ""
-//        self.navigationItem.title = self.chosenMealDetails.mealName.capitalized
-//
-//        for item in newIngredientsAndMeasures {
-//            newIngredientsText += item
-//        }
-//
-//        allTextLabel.text = newIngredientsText + "\n\n\n ------==============------ \n\n\n\n" + formattedInstructions
-//
+
         makeCleanLabelText()
-       // self.ingredientsLabel.text = newIngredientsText
         
         let urlString = self.chosenMealDetails.mealImageURL
         
         if let url = URL(string: urlString) {
             self.loadPhotoFromURL(url: url)
         }
-        
         rebuildStackView()
-        
-      //  placeYoutubeButton()
     }
 
     
     func parseMealDetails() {
         
-        //var spacedInstructions: String = ""
         var cleanIngredientsStringArray: [String] = []
         var cleanMeasuresStringArray: [String] = []
         let mirror = Mirror(reflecting: self.chosenMealDetails!)
@@ -137,18 +108,14 @@ class MealDetailsViewController: UIViewController {
                 formattedInstructions = chosenMealDetails.instructions.replacingOccurrences(of: "\n", with: "\n\n")
                 newIngredientsAndMeasures = zip(cleanIngredientsStringArray, cleanMeasuresStringArray).map(+)
             }
-            
             makeCleanLabelText()
-//            model.cleanTextByMealID[mealID] = newIngredientsText + "\n\n\n ------==============------ \n\n\n\n" + formattedInstructions
         }
-        
         setUpView()
     }
     
     func makeCleanLabelText() {
         var newIngredientsText: String = ""
         
-    
         for item in newIngredientsAndMeasures {
             newIngredientsText += item
         }
@@ -160,7 +127,6 @@ class MealDetailsViewController: UIViewController {
     func fetchMealDetailsIfNeeded() {
         
         guard model.mealImageDataByID[mealID] == nil, model.mealDetailInfoByID[mealID] == nil else {
-            
             
             chosenMealDetails = model.mealDetailInfoByID[mealID]
             navigationItem.title = chosenMealDetails.mealName.capitalized
@@ -180,7 +146,6 @@ class MealDetailsViewController: UIViewController {
             }
             
             print("fetching meal details")
-            
             Networking.shared.taskForJSON(url: url, responseType: MealDetailsResponse.self) { response, error in
                 
                 guard let response = response else {

@@ -18,6 +18,7 @@ class CategoriesCollectionViewController: UICollectionViewController {
     let mealsByCategoryBaseURLString = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
     
     
+    //MARK: ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCategoriesCollection()
@@ -36,17 +37,13 @@ class CategoriesCollectionViewController: UICollectionViewController {
         guard categoryImageData.isEmpty  else {
             return
         }
-        
-//        guard categoryImageData.isEmpty else {// bah
-//            return
-//        }
+
         print("getting category photos")
         for category in allCategories {
             if let photoURL = URL(string: category.categoryImageString) {
                 self.loadPhotoFromURL(url: photoURL)
             }
         }
-        
     }
     
     func fetchMealsByCategory() {
@@ -70,7 +67,6 @@ class CategoriesCollectionViewController: UICollectionViewController {
         }
     }
     
-    
     func loadPhotoFromURL(url: URL) {
         
         guard let imageData = try? Data(contentsOf: url) else {
@@ -80,12 +76,9 @@ class CategoriesCollectionViewController: UICollectionViewController {
         
         DispatchQueue.main.async {
             self.model.categoryImageData.append(imageData)
-          //  self.categoryImageData.append(imageData)
             self.collectionView.reloadData()
         }
-        
     }
-    
     
     //MARK: UICollectionViewDataSource, UICollectionViewDelegate
     

@@ -19,7 +19,7 @@ class MealReferenceModel {
     var mealImageDataByID: [String : Data] = [:]
     var mealDetailInfoByID: [String : MealDetailResults] = [:]
     var cleanTextByMealID: [String : String] = [:]
-    
+    var myResume: Data!
 }
 
 

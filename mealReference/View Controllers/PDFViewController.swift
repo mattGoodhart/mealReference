@@ -14,7 +14,6 @@ class PDFViewController: UIViewController {
 @IBOutlet weak var pdfView: PDFView!
 
 var resumeData: Data!
-//var resume: PDFDocument!
     
     override func viewDidLoad() {
         setPDFView()

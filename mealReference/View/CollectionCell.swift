@@ -21,5 +21,4 @@ class CollectionCell: UICollectionViewCell {
         label.text = "Category"
         imageView.image = UIImage(systemName: "menucard.fill")
     }
-    
 }
