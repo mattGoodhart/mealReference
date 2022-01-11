@@ -13,10 +13,12 @@ class MealReferenceModel {
     private init() {}
     
     var allCategories: [MealCategory] = []
-    var mealsByCategoryDictionary: [String:[MealResults]] = [:]
+    var mealsByCategoryDictionary: [String : [MealResults] ] = [:]
     var categoryImageData: [Data] = []
     var mealImageDataByCategory: [String: [Data]] = [:]
-    var mealImageDataByID: [String: Data] = [:]
+    var mealImageDataByID: [String : Data] = [:]
+    var mealDetailInfoByID: [String : MealDetailResults] = [:]
+    var cleanTextByMealID: [String : String] = [:]
     
 }
 

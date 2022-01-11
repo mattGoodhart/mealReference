@@ -17,6 +17,7 @@ class MealDetailsViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var youtubeButton: UIButton!
 
+    let model = MealReferenceModel.shared
     var mealDetailsBaseURLString: String = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
     var mealID: String = ""
     var mealName: String = ""
@@ -28,7 +29,7 @@ class MealDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchMealDetails()
+        fetchMealDetailsIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +62,7 @@ class MealDetailsViewController: UIViewController {
         
         DispatchQueue.main.async {
             let image = UIImage(data: imageData)
+            self.model.mealImageDataByID[self.mealID] = imageData
             self.imageView.image = image
             self.handleActivityIndicator(indicator: self.activityIndicator, isActive: false)
         }
@@ -87,16 +89,16 @@ class MealDetailsViewController: UIViewController {
     }
     
     func setUpView() {
-        var newIngredientsText: String = ""
-        self.navigationItem.title = self.chosenMealDetails.mealName.capitalized
-    
-        for item in newIngredientsAndMeasures {
-            newIngredientsText += item
-        }
-        
-        allTextLabel.text = newIngredientsText + "\n\n\n ------==============------ \n\n\n\n" + formattedInstructions
-        
-        
+//        var newIngredientsText: String = ""
+//        self.navigationItem.title = self.chosenMealDetails.mealName.capitalized
+//
+//        for item in newIngredientsAndMeasures {
+//            newIngredientsText += item
+//        }
+//
+//        allTextLabel.text = newIngredientsText + "\n\n\n ------==============------ \n\n\n\n" + formattedInstructions
+//
+        makeCleanLabelText()
        // self.ingredientsLabel.text = newIngredientsText
         
         let urlString = self.chosenMealDetails.mealImageURL
@@ -135,11 +137,42 @@ class MealDetailsViewController: UIViewController {
                 formattedInstructions = chosenMealDetails.instructions.replacingOccurrences(of: "\n", with: "\n\n")
                 newIngredientsAndMeasures = zip(cleanIngredientsStringArray, cleanMeasuresStringArray).map(+)
             }
+            
+            makeCleanLabelText()
+//            model.cleanTextByMealID[mealID] = newIngredientsText + "\n\n\n ------==============------ \n\n\n\n" + formattedInstructions
         }
+        
         setUpView()
     }
     
-        func fetchMealDetails() {
+    func makeCleanLabelText() {
+        var newIngredientsText: String = ""
+        
+    
+        for item in newIngredientsAndMeasures {
+            newIngredientsText += item
+        }
+        
+        allTextLabel.text = newIngredientsText + "\n\n\n ------==============------ \n\n\n\n" + formattedInstructions
+        model.cleanTextByMealID[mealID] = allTextLabel.text
+    }
+    
+    func fetchMealDetailsIfNeeded() {
+        
+        guard model.mealImageDataByID[mealID] == nil, model.mealDetailInfoByID[mealID] == nil else {
+            
+            
+            chosenMealDetails = model.mealDetailInfoByID[mealID]
+            navigationItem.title = chosenMealDetails.mealName.capitalized
+            allTextLabel.text = model.cleanTextByMealID[mealID]
+            
+            if let image = UIImage(data: model.mealImageDataByID[mealID]!) {
+                imageView.image = image
+            }
+            
+            handleActivityIndicator(indicator: activityIndicator, isActive: false)
+                return
+            }
             
             guard let url = URL(string: mealDetailsBaseURLString + mealID) else {
                 print("Couldnt Create URL for Meal Details")
@@ -157,6 +190,7 @@ class MealDetailsViewController: UIViewController {
                     return // add alert message?
                 }
                 self.chosenMealDetails = response.meals.first
+                self.model.mealDetailInfoByID[self.mealID] = self.chosenMealDetails
                 self.parseMealDetails()
             }
         }
